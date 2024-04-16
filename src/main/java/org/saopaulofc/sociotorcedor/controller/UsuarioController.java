@@ -28,11 +28,13 @@ public class UsuarioController {
     }
     @GetMapping("/{id}")
     public Optional<Usuario> visualizarPeloId(@PathVariable String cpf){
-        return usuarioService.visualizarPeloId(cpf);
+        var user = usuarioService.visualizarPeloId(cpf);
+        return user;
     }
 
     @GetMapping
     public List<Usuario> visualizarUsuarios(){
-        return usuarioService.visualizarTodos();
+        var listaUsuarios = usuarioService.visualizarTodos();
+        return listaUsuarios;
     }
 }
