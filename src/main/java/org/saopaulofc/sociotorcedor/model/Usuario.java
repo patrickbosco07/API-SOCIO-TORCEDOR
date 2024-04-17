@@ -14,8 +14,14 @@ public class Usuario {
     private String email;
     @Column(nullable = false)
     private int senha;
-    @Column(nullable = false)
     @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumns(value = {
+            @JoinColumn(name="endereco_id", referencedColumnName="cep"),
+            @JoinColumn(name="endereco_logradouro", referencedColumnName="logradouro"),
+            @JoinColumn(name="endereco_bairro", referencedColumnName="bairro"),
+            @JoinColumn(name="endereco_localidade", referencedColumnName="localidade"),
+            @JoinColumn(name="endereco_uf", referencedColumnName="uf")
+    })
     private Endereco endereco;
     @Column(nullable = false)
     private Assinatura assinatura;

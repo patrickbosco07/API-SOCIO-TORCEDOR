@@ -6,14 +6,20 @@ import org.springframework.aot.generate.Generated;
 @Entity(name = "tb_enderecos")
 public class Endereco {
     @Id
+    @Column(nullable = false)
     private String cep;
+    @Column(nullable = false)
     private String logradouro;
     private String complemento;
+    @Column(nullable = false)
     private String bairro;
+    @Column(nullable = false)
     private String localidade;
+    @Column(nullable = false)
     private String uf;
     private String ibge;
     private String gia;
+    @Column(nullable = false)
     private String ddd;
     private String siafi;
 
