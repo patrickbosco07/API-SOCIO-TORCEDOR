@@ -24,6 +24,7 @@ public class Usuario {
     })
     private Endereco endereco;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Assinatura assinatura;
 
     public Long getId() {
