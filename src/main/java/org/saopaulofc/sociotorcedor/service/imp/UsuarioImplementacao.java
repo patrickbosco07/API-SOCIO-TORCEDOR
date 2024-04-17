@@ -28,21 +28,21 @@ public class UsuarioImplementacao implements UsuarioService {
     public void inserirUsuario(Usuario usuario) {criarUsuarioValidoComCep(usuario);}
 
     @Override
-    public void atualizarUsuario(String cpf, Usuario usuario) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(cpf);
+    public void atualizarUsuario(Long id, Usuario usuario) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()){
             usuarioRepository.save(usuario);
         } else {throw new NoSuchElementException("Usuário não encontrado");}
     }
 
     @Override
-    public void deletarUsuario(String cpf) {
-        usuarioRepository.deleteById(cpf);
+    public void deletarUsuario(Long id) {
+        usuarioRepository.deleteById(id);
     }
 
     @Override
-    public Optional<Usuario> visualizarPeloId(String cpf) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(cpf);
+    public Optional<Usuario> visualizarPeloId(Long id) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()){
             return usuarioOptional;
         } else {throw new NoSuchElementException("Usuário não encontrado");}
@@ -56,7 +56,7 @@ public class UsuarioImplementacao implements UsuarioService {
 
     private void criarUsuarioValidoComCep(Usuario usuario){
         //Pesquisando usuário no banco de dados
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getCpf());
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getId());
         //Caso o usuário não existe, fazer a criação de seu endereço primeiro, para não dar erro na API
         if (usuarioOptional.isEmpty()){
             String cep = usuario.getEndereco().getCep();

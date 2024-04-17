@@ -19,16 +19,16 @@ public class UsuarioController {
         usuarioService.inserirUsuario(usuario);
     }
     @PutMapping("/{id}")
-    public void atualizar(@PathVariable String cpf, @RequestBody Usuario usuario){
-        usuarioService.atualizarUsuario(cpf,usuario);
+    public void atualizar(@PathVariable Long id, @RequestBody Usuario usuario){
+        usuarioService.atualizarUsuario(id,usuario);
     }
     @DeleteMapping("/{id}")
-    public void excluir(@PathVariable String cpf){
-        usuarioService.deletarUsuario(cpf);
+    public void excluir(@PathVariable Long id){
+        usuarioService.deletarUsuario(id);
     }
     @GetMapping("/{id}")
-    public Optional<Usuario> visualizarPeloId(@PathVariable String cpf){
-        var user = usuarioService.visualizarPeloId(cpf);
+    public Optional<Usuario> visualizarPeloId(@PathVariable Long id){
+        var user = usuarioService.visualizarPeloId(id);
         return user;
     }
 

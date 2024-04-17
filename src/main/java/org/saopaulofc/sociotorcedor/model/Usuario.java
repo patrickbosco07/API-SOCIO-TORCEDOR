@@ -3,18 +3,26 @@ import jakarta.persistence.*;
 import org.saopaulofc.sociotorcedor.model.constantes.Assinatura;
 @Entity(name = "tb_users")
 public class Usuario {
-    @Column(nullable = false)
-    String nome;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
-    String cpf;
+    private String nome;
     @Column(nullable = false)
-    String email;
+    private String cpf;
     @Column(nullable = false)
-    int senha;
+    private String email;
+    @Column(nullable = false)
+    private int senha;
+    @Column(nullable = false)
     @OneToOne(fetch = FetchType.EAGER)
-    Endereco endereco;
-    Assinatura assinatura;
+    private Endereco endereco;
+    @Column(nullable = false)
+    private Assinatura assinatura;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;

@@ -10,9 +10,9 @@ import java.util.Optional;
 public interface UsuarioService {
 
     public void inserirUsuario(Usuario usuario);
-    public void atualizarUsuario(String cpf, Usuario usuario);
-    public void deletarUsuario(String cpf);
-    public Optional<Usuario> visualizarPeloId(String cpf);
+    public void atualizarUsuario(Long id, Usuario usuario);
+    public void deletarUsuario(Long id);
+    public Optional<Usuario> visualizarPeloId(Long id);
     public List<Usuario> visualizarTodos();
 
 }
