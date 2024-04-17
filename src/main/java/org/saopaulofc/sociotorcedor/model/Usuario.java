@@ -8,7 +8,7 @@ public class Usuario {
     private Long id;
     @Column(nullable = false)
     private String nome;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cpf;
     @Column(nullable = false)
     private String email;
