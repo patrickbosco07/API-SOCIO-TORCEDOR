@@ -4,7 +4,7 @@ import org.saopaulofc.sociotorcedor.model.constantes.Assinatura;
 @Entity(name = "tb_users")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String nome;
