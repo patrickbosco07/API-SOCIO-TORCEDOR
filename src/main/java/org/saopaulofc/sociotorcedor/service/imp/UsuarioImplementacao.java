@@ -56,9 +56,10 @@ public class UsuarioImplementacao implements UsuarioService {
 
     private void criarUsuarioValidoComCep(Usuario usuario){
         //Pesquisando usuário no banco de dados
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getId());
-        //Caso o usuário não existe, fazer a criação de seu endereço primeiro, para não dar erro na API
-        if (usuarioOptional.isEmpty()){
+        // Caso o usuário não existe, fazer a criação de seu endereço primeiro, para não dar erro na API
+        if (usuarioRepository.findByCpf(usuario.getCpf())){
+            throw new RuntimeException("Usuário já existente");
+        } else {
             String cep = usuario.getEndereco().getCep();
             //Pesquisando o endereço do usuário no banco de dados de endereços
             Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
@@ -68,8 +69,6 @@ public class UsuarioImplementacao implements UsuarioService {
                 return novoEndereco;
             });
             usuario.setEndereco(endereco);
-        } else {
-            throw new RuntimeException("Usuário já existente");
         }
         usuarioRepository.save(usuario);
     }
