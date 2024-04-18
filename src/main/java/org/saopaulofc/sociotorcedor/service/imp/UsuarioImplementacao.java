@@ -25,13 +25,13 @@ public class UsuarioImplementacao implements UsuarioService {
     private ViaCepService viaCepService;
 
     @Override
-    public void inserirUsuario(Usuario usuario) {criarUsuarioValidoComCep(usuario);}
+    public Usuario inserirUsuario(Usuario usuario) { return criarUsuarioValidoComCep(usuario);}
 
     @Override
-    public void atualizarUsuario(Long id, Usuario usuario) {
+    public Usuario atualizarUsuario(Long id, Usuario usuario) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()){
-            usuarioRepository.save(usuario);
+            return usuarioRepository.save(usuario);
         } else {throw new NoSuchElementException("Usuário não encontrado");}
     }
 
@@ -54,10 +54,10 @@ public class UsuarioImplementacao implements UsuarioService {
         return listaUsuarios;
     }
 
-    private void criarUsuarioValidoComCep(Usuario usuario){
+    private Usuario criarUsuarioValidoComCep(Usuario usuario){
         //Pesquisando usuário no banco de dados
         // Caso o usuário não existe, fazer a criação de seu endereço primeiro, para não dar erro na API
-        if (!usuarioRepository.findByCpf(usuario.getCpf()).isEmpty()){
+        if (usuarioRepository.findByCpf(usuario.getCpf())){
             throw new RuntimeException("Usuário já existente");
         } else {
             String cep = usuario.getEndereco().getCep();
@@ -70,7 +70,7 @@ public class UsuarioImplementacao implements UsuarioService {
             });
             usuario.setEndereco(endereco);
         }
-        usuarioRepository.save(usuario);
+        return usuarioRepository.save(usuario);
     }
 
 }

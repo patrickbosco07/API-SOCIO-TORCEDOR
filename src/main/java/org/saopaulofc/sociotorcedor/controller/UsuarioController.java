@@ -15,12 +15,12 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public void inserir (@RequestBody Usuario usuario){
-        usuarioService.inserirUsuario(usuario);
+    public Usuario inserir (@RequestBody Usuario usuario){
+        return usuarioService.inserirUsuario(usuario);
     }
     @PutMapping("/{id}")
-    public void atualizar(@PathVariable Long id, @RequestBody Usuario usuario){
-        usuarioService.atualizarUsuario(id,usuario);
+    public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuario){
+        return usuarioService.atualizarUsuario(id,usuario);
     }
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable Long id){
