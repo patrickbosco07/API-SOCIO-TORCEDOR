@@ -57,7 +57,7 @@ public class UsuarioImplementacao implements UsuarioService {
     private void criarUsuarioValidoComCep(Usuario usuario){
         //Pesquisando usuário no banco de dados
         // Caso o usuário não existe, fazer a criação de seu endereço primeiro, para não dar erro na API
-        if (usuarioRepository.findByCpf(usuario.getCpf())){
+        if (!usuarioRepository.findByCpf(usuario.getCpf()).isEmpty()){
             throw new RuntimeException("Usuário já existente");
         } else {
             String cep = usuario.getEndereco().getCep();
