@@ -8,6 +8,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    /*abc*/
     @Column(nullable = false)
     private String cep;
     @Column(nullable = false)
