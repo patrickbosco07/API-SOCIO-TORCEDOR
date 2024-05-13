@@ -6,6 +6,8 @@ import org.springframework.aot.generate.Generated;
 @Entity(name = "tb_enderecos")
 public class Endereco {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     private String cep;
     @Column(nullable = false)
